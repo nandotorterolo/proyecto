@@ -1,0 +1,1 @@
+$wnd.com_bqn_usersWebApp_UI_AppWidgetSet.runAsyncCallback1('Obb(1680,1,aDd);_.nc=function jcc(){W0b((!R0b&&(R0b=new X0b),R0b),this.b.e)};hpd(ai)(1);\n//# sourceURL=com.bqn.usersWebApp.UI.AppWidgetSet-1.js\n')
