@@ -1,5 +1,7 @@
 package com.ftorterolo.config
 
+import java.util
+
 import com.amazonaws.AmazonClientException
 import com.amazonaws.auth.AWSCredentials
 import com.amazonaws.auth.profile.ProfileCredentialsProvider
@@ -39,12 +41,10 @@ object SimpleQueueService extends App{
 
 //    sqs.listQueues().getQueueUrls.foreach(println)
 
-
     val queueUrl = "https://sqs.sa-east-1.amazonaws.com/424370919947/SisDis"
 
     val res = sqs.getQueueAttributes(queueUrl, List("ApproximateNumberOfMessages"))
     res.getAttributes.foreach{case (u,v) => println(s"$u : $v")}
-
 
     val m1 = Mensaje(emisor=Detectores.D001.id, receptor=Detectores.D002.id, Map((5,Transportes.Auto.id), (2,Transportes.Moto.id)))
     val json = JsonUtil.toJson(m1)
@@ -59,14 +59,17 @@ object SimpleQueueService extends App{
 
     val messageAttributeValue = new MessageAttributeValue().withDataType("String").withStringValue(jsonLamport)
     val messageAttributes : Map[String, MessageAttributeValue]= Map(("lamport", messageAttributeValue))
+
     val request = new SendMessageRequest()
       .withMessageBody(json)
       .withQueueUrl(queueUrl)
       .withMessageAttributes(messageAttributes)
     sqs.sendMessage(request)
 
+
     val receiveMessageRequest = new ReceiveMessageRequest(queueUrl)
-    val messages =  sqs.receiveMessage(receiveMessageRequest).getMessages
+    val messages =  sqs.receiveMessage(receiveMessageRequest.withMessageAttributeNames("lamport")).getMessages
+//    val messages =  sqs.receiveMessage(receiveMessageRequest).getMessages
 
     println(s"Size ${messages.size()}")
     messages.foreach{ m => println(
@@ -77,23 +80,16 @@ object SimpleQueueService extends App{
          |${m.getBody}
        """.stripMargin)
     }
-    messages.foreach{
-      m=> m.getAttributes.entrySet().foreach {
-        e => println(
-          s"""
-             |${e.getKey}
-             |${e.getValue}
-        """.stripMargin)
-      }
-    }
 
-    println(s"Size ${messages.size()}")
+    messages.foreach{ m=> m.getMessageAttributes.entrySet().foreach{ e =>  println(s"${e.getKey} : ${e.getValue}")} }
+
+//    println(s"Size ${messages.size()}")
 
     // // Delete a message
     if (messages.size()>0) {
-      val messageReceiptHandle = messages.get(0).getReceiptHandle  // handle error out of index
-//      sqs.deleteMessage(new DeleteMessageRequest(queueUrl, messageReceiptHandle))
-//      println(s"Deleted")
+      val messageReceiptHandle = messages.get(0).getReceiptHandle
+      sqs.deleteMessage(new DeleteMessageRequest(queueUrl, messageReceiptHandle))
+      println(s"Deleted")
     }
 
   } catch {
