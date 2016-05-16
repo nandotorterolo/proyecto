@@ -1,4 +1,4 @@
-package com.ftorterolo.acmDashboard.ui
+package com.ftorterolo.SemDashboard.ui
 
 import com.ftorterolo.dashboard.BaseApplication
 import com.vaadin.server.Page

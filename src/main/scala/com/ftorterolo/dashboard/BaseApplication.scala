@@ -1,6 +1,6 @@
 package com.ftorterolo.dashboard
 
-import com.ftorterolo.acmDashboard.ui.AppSession
+import com.ftorterolo.SemDashboard.ui.AppSession
 import org.slf4j.Logger
 
 abstract class BaseApplication {

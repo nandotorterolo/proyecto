@@ -1,4 +1,4 @@
-package com.ftorterolo.acmDashboard.ui.views
+package com.ftorterolo.SemDashboard.ui.views
 
 import com.vaadin.ui._
 import com.vaadin.navigator.{ViewChangeListener, View}
