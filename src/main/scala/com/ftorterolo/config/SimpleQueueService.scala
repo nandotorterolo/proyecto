@@ -30,6 +30,8 @@ import scala.collection.mutable
   * https://github.com/aws/aws-sdk-java/blob/master/src/samples/AmazonSimpleQueueService/SimpleQueueServiceSample.java
   * https://coderwall.com/p/o--apg/easy-json-un-marshalling-in-scala-with-jackson
   */
+
+// https://aws.amazon.com/es/sqs/pricing/
 object SimpleQueueService extends App{
 
   try {
@@ -58,7 +60,9 @@ object SimpleQueueService extends App{
 //    println(MensajeExpandido(m2))  // MensajeExpandido(1D001,2D002,Map(5 -> Auto, 2 -> Moto))
 
     val messageAttributeValue = new MessageAttributeValue().withDataType("String").withStringValue(jsonLamport)
-    val messageAttributes : Map[String, MessageAttributeValue]= Map(("lamport", messageAttributeValue))
+    val destinoMessageAttributeValue = new MessageAttributeValue().withDataType("String").withStringValue("Destino1")
+    val messageAttributes : Map[String, MessageAttributeValue]= Map(("destino",destinoMessageAttributeValue),("lamport", messageAttributeValue))
+//    val messageAttributes : Map[String, MessageAttributeValue]= Map(("lamport", messageAttributeValue))
 
     val request = new SendMessageRequest()
       .withMessageBody(json)
@@ -68,20 +72,20 @@ object SimpleQueueService extends App{
 
 
     val receiveMessageRequest = new ReceiveMessageRequest(queueUrl)
-    val messages =  sqs.receiveMessage(receiveMessageRequest.withMessageAttributeNames("lamport")).getMessages
+    // que cosas que queres que te traiga.
+    val messages =  sqs.receiveMessage(receiveMessageRequest.withMessageAttributeNames(List("lamport", "destino"))).getMessages
 //    val messages =  sqs.receiveMessage(receiveMessageRequest).getMessages
 
-    println(s"Size ${messages.size()}")
+    println(s"messages received: ${messages.size()}")
+
+    //  |${m.getMessageId}  |${m.getReceiptHandle}  |${m.getMD5OfBody}
     messages.foreach{ m => println(
       s"""
-         |${m.getMessageId}
-         |${m.getReceiptHandle}
-         |${m.getMD5OfBody}
          |${m.getBody}
        """.stripMargin)
     }
 
-    messages.foreach{ m=> m.getMessageAttributes.entrySet().foreach{ e =>  println(s"${e.getKey} : ${e.getValue}")} }
+    messages.foreach{ m=> m.getMessageAttributes.entrySet().foreach{ e =>  println(s"${e.getKey} : ${e.getValue.getStringValue}")} }
 
 //    println(s"Size ${messages.size()}")
 
