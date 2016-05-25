@@ -2,7 +2,7 @@ package com.ftorterolo.SemDashboard.ui
 
 import java.util.concurrent.TimeUnit
 
-import com.ftorterolo.config.CorredorService
+import com.ftorterolo.config.Detector_001
 import com.ftorterolo.dashboard.{LoginView, BaseMain}
 import com.google.gwt.thirdparty.guava.common.util.concurrent.AbstractScheduledService.Scheduler
 import com.vaadin.annotations.{PreserveOnRefresh, Theme, Title}

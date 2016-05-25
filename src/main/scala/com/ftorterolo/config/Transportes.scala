@@ -13,12 +13,12 @@ import com.ftorterolo.config.Transportes.Vehiculo
 
 object  MensajeExpandido {
   def apply(mensaje: Mensaje): MensajeExpandido = {
-    val trafico = mensaje.trafico.mapValues(Transportes(_))
+    val trafico = mensaje.trafico.map{case (transporte, cant) => (Transportes(transporte),cant)}
     MensajeExpandido(Detectores(mensaje.emisor),Detectores(mensaje.receptor), trafico)
   }
 }
-case class Mensaje(emisor:Detectores.ID, receptor:Detectores.ID, trafico:Map[Int,Transportes.ID])
-case class MensajeExpandido(emisor:Detector, receptor:Detector,trafico:Map[Int, Vehiculo])
+case class Mensaje(emisor:Detectores.ID, receptor:Detectores.ID, trafico:Map[Transportes.ID,Int])
+case class MensajeExpandido(emisor:Detector, receptor:Detector,trafico:Map[Vehiculo,Int])
 
 object Transportes {
 
@@ -51,7 +51,6 @@ object Detectores {
   case object D002 extends Detector(2,"D002", Barrios.Colon, Calles.Garzon, Calles.Lezica,2)
   case object D003 extends Detector(3,"D003", Barrios.Colon, Calles.Garzon, Calles.Lezica,3)
   case object D004 extends Detector(4,"D004", Barrios.Colon, Calles.Garzon, Calles.Lezica,4)
-
 }
 
 object Barrios {
