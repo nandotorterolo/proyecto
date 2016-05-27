@@ -19,16 +19,18 @@ class CorredorView extends VerticalLayout with View  {
   val detector_002 = new Detector_002
   val detector_003 = new Detector_003
   val detector_004 = new Detector_004
+  val detector_005 = new Detector_005
 
   val startButton : Button = {
     val but = new Button("start")
     but.addClickListener( new ClickListener {
       override def buttonClick(event: ClickEvent): Unit = {
 //        MessageHandler.purge()
-        detector_001.start(initialDelay = 80, period = 60, TimeUnit.SECONDS)
-        detector_002.start(initialDelay = 90, period = 360, TimeUnit.SECONDS)
-        detector_003.start(initialDelay = 100, period = 360, TimeUnit.SECONDS)
-        detector_004.start(initialDelay = 110, period = 360, TimeUnit.SECONDS)
+        detector_001.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
+        detector_002.start(initialDelay = 20, period = 30, TimeUnit.SECONDS)
+        detector_003.start(initialDelay = 30, period = 30, TimeUnit.SECONDS)
+        detector_004.start(initialDelay = 40, period = 30, TimeUnit.SECONDS)
+        detector_005.start(initialDelay = 10, period = 10, TimeUnit.SECONDS)  // dejar corriendo
         startButton.setEnabled(false)
         stopButton.setEnabled(true)
       }
@@ -40,10 +42,10 @@ class CorredorView extends VerticalLayout with View  {
     val but = new Button("stop")
     but.addClickListener( new ClickListener {
       override def buttonClick(event: ClickEvent): Unit = {
-        detector_001.shutdown()
-        detector_002.shutdown()
-        detector_003.shutdown()
-        detector_004.shutdown()
+//        detector_001.shutdown()
+//        detector_002.shutdown()
+//        detector_003.shutdown()
+//        detector_004.shutdown()
         startButton.setEnabled(true)
         stopButton.setEnabled(false)
       }

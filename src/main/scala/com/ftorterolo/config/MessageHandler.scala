@@ -13,8 +13,8 @@ import scala.collection.JavaConversions._
 object MessageHandler {
 
   val logger = LoggerFactory.getLogger("SendMessage")
-  val queueUrl = "https://sqs.sa-east-1.amazonaws.com/424370919947/SisDis"
-  val lamport = "lamport"
+  val QueueUrl = "https://sqs.sa-east-1.amazonaws.com/424370919947/SisDis"
+  val Lamport = "lamport"
 
   val credentials: AWSCredentials = new ProfileCredentialsProvider().getCredentials
   val sqs = new AmazonSQSClient(credentials)
@@ -23,11 +23,11 @@ object MessageHandler {
 
   def sendMessage(message:String, lamport:String) = {
     val messageAttributeValue = new MessageAttributeValue().withDataType("String").withStringValue(lamport)
-    val messageAttributes : Map[String, MessageAttributeValue]= Map((MessageHandler.lamport,messageAttributeValue))
+    val messageAttributes : Map[String, MessageAttributeValue]= Map((Lamport,messageAttributeValue))
 
     val request = new SendMessageRequest()
       .withMessageBody(message)
-      .withQueueUrl(queueUrl)
+      .withQueueUrl(QueueUrl)
       .withMessageAttributes(messageAttributes)
 
     try {
@@ -40,14 +40,16 @@ object MessageHandler {
   }
 
   def receiveMessage(): Seq[Message] = {
-    val receiveMessageRequest = new ReceiveMessageRequest(queueUrl)
-    val messages =  sqs.receiveMessage(receiveMessageRequest.withMessageAttributeNames(MessageHandler.lamport)).getMessages
+    println(s"send: receiveMessageRequest")
+    val receiveMessageRequest = new ReceiveMessageRequest(QueueUrl)
+    val messages =  sqs.receiveMessage(receiveMessageRequest.withMessageAttributeNames(List(Lamport))).getMessages
+    println(s"size ${messages.size()}")
     messages
   }
 
   def deleteMessage(receiptHandle:String) = {
     try {
-      sqs.deleteMessage(queueUrl, receiptHandle)
+      sqs.deleteMessage(QueueUrl, receiptHandle)
     } catch {
       case ife:InvalidIdFormatException => logger.error(s"Error at delete messege", ife)
       case rfe:ReceiptHandleIsInvalidException => logger.error(s"Error at delete message", rfe)
@@ -61,7 +63,7 @@ object MessageHandler {
     */
   def purge() = {
     try {
-      sqs.purgeQueue(new PurgeQueueRequest(queueUrl))
+      sqs.purgeQueue(new PurgeQueueRequest(QueueUrl))
     } catch {
       case qdnee: QueueDoesNotExistException => logger.error(s"Error at purgeQueue", qdnee)
       case pqipe: PurgeQueueInProgressException => logger.error(s"Error at purgeQueue", pqipe)
