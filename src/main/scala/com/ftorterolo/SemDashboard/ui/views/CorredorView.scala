@@ -27,9 +27,9 @@ class CorredorView extends VerticalLayout with View  {
       override def buttonClick(event: ClickEvent): Unit = {
 //        MessageHandler.purge()
         detector_001.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
-        detector_002.start(initialDelay = 20, period = 30, TimeUnit.SECONDS)
-        detector_003.start(initialDelay = 30, period = 30, TimeUnit.SECONDS)
-        detector_004.start(initialDelay = 40, period = 30, TimeUnit.SECONDS)
+        detector_002.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
+        detector_003.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
+        detector_004.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
         detector_005.start(initialDelay = 10, period = 10, TimeUnit.SECONDS)  // dejar corriendo
         startButton.setEnabled(false)
         stopButton.setEnabled(true)
@@ -84,6 +84,8 @@ class CorredorView extends VerticalLayout with View  {
 
     val row = getRowView
     row.addComponent(vlayout)
+
+    startButton.click()  // remove it.
 
   }
 

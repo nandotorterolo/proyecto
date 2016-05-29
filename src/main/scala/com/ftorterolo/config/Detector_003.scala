@@ -5,42 +5,68 @@ import java.util.concurrent._
 import com.ftorterolo.util.JsonUtil
 import org.slf4j.LoggerFactory
 
-class Detector_003  {
+class Detector_003  extends DetectorQueues {
 
   val logger = LoggerFactory.getLogger(this.getClass)
-  val detector_D003 = Executors.newSingleThreadScheduledExecutor()
+  val sendExecutor = Executors.newSingleThreadScheduledExecutor()
+  val receiveExecutor = Executors.newSingleThreadScheduledExecutor()
   val vector_D003:Array[Int] = Array(0,0,0,0)
 
-  def runnable= new Runnable() {
+  def start(initialDelay: Long, period: Long, unit: TimeUnit) = {
+    sendExecutor.scheduleAtFixedRate(sendRunner, initialDelay, period, TimeUnit.SECONDS)
+    receiveExecutor.scheduleAtFixedRate(receiveRunner, initialDelay + 10, period/3, TimeUnit.SECONDS)
+  }
+
+  def shutdown() = {
+    sendExecutor.shutdown()
+    receiveExecutor.shutdown()
+  }
+
+  def sendRunner= new Runnable() {
     override def run(): Unit = {
+
+      //vector are 0-based
+      vector_D003.update(2,vector_D003(2)+1)
+      val lamport = JsonUtil.toJson(vector_D003)
 
       val r = scala.util.Random
       val autosR = r.nextInt(10)
       val motosR = r.nextInt(10)
       val omnibusR = r.nextInt(10)
 
-      //vector are 0-based
-      vector_D003.update(2,vector_D003(2)+1)
-
       val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Omnibus.id -> omnibusR )
-
       val d3_to_d1 = Mensaje(emisor=Detectores.D003.id, receptor=Detectores.D001.id,trafico)
       val d3_to_d2 = Mensaje(emisor=Detectores.D003.id, receptor=Detectores.D002.id,trafico)
+
       val d3_to_d4 = Mensaje(emisor=Detectores.D003.id, receptor=Detectores.D004.id,trafico)
-
-      val lamport = JsonUtil.toJson(vector_D003)
-      MessageHandler.sendMessage(JsonUtil.toJson(d3_to_d1), lamport)
-      MessageHandler.sendMessage(JsonUtil.toJson(d3_to_d2), lamport)
-      MessageHandler.sendMessage(JsonUtil.toJson(d3_to_d4), lamport)
-
+      MessageHandler.sendMessage(queueUrlD001,JsonUtil.toJson(d3_to_d1), lamport)
+      MessageHandler.sendMessage(queueUrlD002,JsonUtil.toJson(d3_to_d2), lamport)
+      MessageHandler.sendMessage(queueUrlD004,JsonUtil.toJson(d3_to_d4), lamport)
 //      println(s"$lamport")
     }
   }
 
-  def start(initialDelay: Long, period: Long, unit: TimeUnit) = {
-    detector_D003.scheduleAtFixedRate(runnable, initialDelay, period, TimeUnit.SECONDS)
-  }
+  def receiveRunner = new Runnable() {
+    override def run(): Unit = {
+      val messages = MessageHandler.receiveMessage(queueUrlD003)
 
-  def shutdown() = detector_D003.shutdown()
+      if (messages.nonEmpty) {
+        val mensaje = JsonUtil.fromJson[Mensaje](messages.head.getBody)
+        val lamport = JsonUtil.fromJson[(Int, Int, Int, Int)](messages.head.getMessageAttributes.get(MessageHandler.Lamport).getStringValue)
+
+        if (mensaje.receptor.equals(Detectores.D003.id)) {
+          vector_D003.update(0, Math.max(vector_D003(0), lamport._1))
+          vector_D003.update(1, Math.max(vector_D003(1), lamport._2))
+          vector_D003.update(2, vector_D003(2) + 1)
+          vector_D003.update(3, Math.max(vector_D003(3), lamport._4))
+          // save message and delete from the quede
+          MessageHandler.deleteMessage(queueUrlD003,messages.head.getReceiptHandle)
+        }
+        else {
+          logger.error("This message is in wrong place")
+        }
+      }
+    }
+  }
 
 }
