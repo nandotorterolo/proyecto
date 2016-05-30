@@ -24,7 +24,6 @@ class Detector_001 extends DetectorQueues {
     receiveExecutor.shutdown()
   }
 
-
   def sendRunner = new Runnable() {
     override def run(): Unit = {
 
@@ -32,8 +31,8 @@ class Detector_001 extends DetectorQueues {
       val lamport = JsonUtil.toJson(vector_D001)
 
       val r = scala.util.Random
-      val (autosR, motosR, omnibusR )= (r.nextInt(10), r.nextInt(10), r.nextInt(10))
-      val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Omnibus.id -> omnibusR )
+      val (autosR, motosR, escuelaR, omnibusR)= (r.nextInt(10), r.nextInt(10), r.nextInt(5),r.nextInt(10))
+      val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Escuela.id -> escuelaR, Transportes.Omnibus.id -> omnibusR )
 
       val d1_to_d2 = Mensaje(emisor = Detectores.D001.id, receptor = Detectores.D002.id, trafico)
       val d1_to_d3 = Mensaje(emisor = Detectores.D001.id, receptor = Detectores.D003.id, trafico)

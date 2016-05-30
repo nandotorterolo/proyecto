@@ -29,12 +29,8 @@ class Detector_002 extends DetectorQueues {
       val lamport = JsonUtil.toJson(vector_D002)
 
       val r = scala.util.Random
-      val autosR = r.nextInt(10)
-      val motosR = r.nextInt(10)
-      val omnibusR = r.nextInt(10)
-
-      //vector are 0-based
-      val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Omnibus.id -> omnibusR )
+      val (autosR, motosR, escuelaR, omnibusR)= (r.nextInt(10), r.nextInt(10), r.nextInt(5),r.nextInt(10))
+      val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Escuela.id -> escuelaR, Transportes.Omnibus.id -> omnibusR )
 
       val d2_to_d1 = Mensaje(emisor=Detectores.D002.id, receptor=Detectores.D001.id,trafico)
       val d2_to_d3 = Mensaje(emisor=Detectores.D002.id, receptor=Detectores.D003.id,trafico)

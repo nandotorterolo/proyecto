@@ -25,16 +25,13 @@ class Detector_004  extends DetectorQueues  {
   def sendRunner = new Runnable() {
     override def run(): Unit = {
 
-      val r = scala.util.Random
-      val autosR = r.nextInt(10)
-      val motosR = r.nextInt(10)
-      val omnibusR = r.nextInt(10)
-
       //vector are 0-based
       vector_D004.update(3,vector_D004(3)+1)
       val lamport = JsonUtil.toJson(vector_D004)
 
-      val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Omnibus.id -> omnibusR )
+      val r = scala.util.Random
+      val (autosR, motosR, escuelaR, omnibusR)= (r.nextInt(10), r.nextInt(10), r.nextInt(5),r.nextInt(10))
+      val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Escuela.id -> escuelaR, Transportes.Omnibus.id -> omnibusR )
 
       val d4_to_d1 = Mensaje(emisor=Detectores.D004.id, receptor=Detectores.D001.id,trafico)
       val d4_to_d2 = Mensaje(emisor=Detectores.D004.id, receptor=Detectores.D002.id,trafico)
@@ -55,7 +52,6 @@ class Detector_004  extends DetectorQueues  {
         val mensaje = JsonUtil.fromJson[Mensaje](messages.head.getBody)
         val lamport = JsonUtil.fromJson[(Int, Int, Int, Int)](messages.head.getMessageAttributes.get(MessageHandler.Lamport).getStringValue)
 
-        println(s"${mensaje.receptor} == ${Detectores.D004.id}")
         if (mensaje.receptor.equals(Detectores.D004.id)) {
           vector_D004.update(0, Math.max(vector_D004(0), lamport._1))
           vector_D004.update(1, Math.max(vector_D004(1), lamport._2))
