@@ -95,7 +95,7 @@ public class RootGridLayoutBase {
         vL003.setImmediate(false);
         vL003.setWidth("100.0%");
         vL003.setHeight("100.0%");
-        vL003.addStyleName("entrada");
+        vL003.addStyleName("calle");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL003.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL003, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL003.getParent();
