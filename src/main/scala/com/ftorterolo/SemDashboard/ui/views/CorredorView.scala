@@ -2,12 +2,14 @@ package com.ftorterolo.SemDashboard.ui.views
 
 import java.util.concurrent.TimeUnit
 
+import com.ftorterolo.SemDasboard.views.RootGridLayoutBase
 import com.ftorterolo.config._
 import com.vaadin.event.LayoutEvents.{LayoutClickEvent, LayoutClickListener}
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent
 import com.vaadin.navigator.{ViewChangeListener, View}
 import com.vaadin.shared.ui.MarginInfo
 import com.vaadin.ui.Button.{ClickEvent, ClickListener}
+import com.vaadin.ui.Layout.AlignmentHandler
 import com.vaadin.ui._
 import org.slf4j.LoggerFactory
 
@@ -76,27 +78,33 @@ class CorredorView extends VerticalLayout with View  {
     top.setExpandRatio(title, 1)
 
 
-    val vlayout = new VerticalLayout()
+    val vlayout = new HorizontalLayout()
     startButton.setEnabled(true)
     stopButton.setEnabled(false)
     vlayout.addComponent(startButton)
     vlayout.addComponent(stopButton)
+    addComponent(vlayout)
 
-    val row = getRowView
-    row.addComponent(vlayout)
+    //    val row = getRowView
+//    row.addComponent(vlayout)
 
-    startButton.click()  // remove it.
+    val row2 = getRowView
+    val layout = new RootGridLayoutBase
+    row2.addComponent(layout.getRootComponent)
+
+
+//    startButton.click()  // remove it.
+
+
 
   }
-
   private def getRowView : HorizontalLayout = {
     val row = new HorizontalLayout()
     row.setSizeFull()
-    row.setMargin(new MarginInfo(true, true, false, true))
-    row.setSpacing(true)
+//    row.setMargin(new MarginInfo(true, true, false, true))
+//    row.setSpacing(true)
     addComponent(row)
     setExpandRatio(row, 1.5f)
     row
   }
-
 }
