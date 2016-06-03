@@ -14,15 +14,17 @@ object MessageHandler {
   val logger = LoggerFactory.getLogger("MessageHandler")
 //  val QueueUrl = "https://sqs.sa-east-1.amazonaws.com/424370919947/SisDis"
   val Lamport = "lamport"
+  val Snapshot = "snapshot"
 
   val credentials: AWSCredentials = new ProfileCredentialsProvider().getCredentials
   val sqs = new AmazonSQSClient(credentials)
   val saEast1 = Region.getRegion(Regions.SA_EAST_1)
   sqs.setRegion(saEast1)
 
-  def sendMessage(queueUrl:String, message:String, lamport:String) = {
-    val messageAttributeValue = new MessageAttributeValue().withDataType("String").withStringValue(lamport)
-    val messageAttributes : Map[String, MessageAttributeValue]= Map((Lamport,messageAttributeValue))
+  def sendMessage(queueUrl:String, message:String, lamport:String, snapshot:String="false") = {
+    val lamportAttributeValue = new MessageAttributeValue().withDataType("String").withStringValue(lamport)
+    val snapshotAttributeValue = new MessageAttributeValue().withDataType("String").withStringValue(snapshot)
+    val messageAttributes : Map[String, MessageAttributeValue]= Map((Lamport,lamportAttributeValue), (Snapshot,snapshotAttributeValue))
 
     val request = new SendMessageRequest()
       .withMessageBody(message)
@@ -41,7 +43,7 @@ object MessageHandler {
   def receiveMessage(queueUrl:String): Seq[Message] = {
 //    println(s"send: receiveMessage
     val receiveMessageRequest = new ReceiveMessageRequest(queueUrl)
-    val messages =  sqs.receiveMessage(receiveMessageRequest.withMessageAttributeNames(List(Lamport))).getMessages
+    val messages =  sqs.receiveMessage(receiveMessageRequest.withMessageAttributeNames(List(Lamport,Snapshot))).getMessages
 //    println(s"size ${messages.size()}")
     messages
   }

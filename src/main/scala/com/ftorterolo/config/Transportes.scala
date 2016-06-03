@@ -19,6 +19,7 @@ object  MensajeExpandido {
 }
 case class Mensaje(emisor:Detectores.ID, receptor:Detectores.ID, trafico:Map[Transportes.ID,Int])
 case class MensajeExpandido(emisor:Detector, receptor:Detector,trafico:Map[Vehiculo,Int])
+case class Trafico(auto:Int, moto:Int, escuela:Int, Omnibus:Int)
 
 object Transportes {
 

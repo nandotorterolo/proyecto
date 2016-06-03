@@ -1,11 +1,7 @@
 package com.ftorterolo.SemDasboard.views;
 
-import com.vaadin.ui.AbstractOrderedLayout;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Layout.AlignmentHandler;
-import com.vaadin.ui.VerticalLayout;
 
 public class RootGridLayoutBase {
 
@@ -24,6 +20,7 @@ public class RootGridLayoutBase {
     protected final VerticalLayout vL008 = new VerticalLayout();
     protected final VerticalLayout vL009 = new VerticalLayout();
     protected final VerticalLayout vL010 = new VerticalLayout();
+    protected final Label labelD001 = new Label("TEST");
 
     public RootGridLayoutBase() {
         constructor = true;
@@ -75,7 +72,7 @@ public class RootGridLayoutBase {
         vL002.setImmediate(false);
         vL002.setWidth("100.0%");
         vL002.setHeight("100.0%");
-        vL002.addStyleName("salida");
+//        vL002.addStyleName("salida");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL002.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL002, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL002.getParent();
@@ -95,7 +92,10 @@ public class RootGridLayoutBase {
         vL003.setImmediate(false);
         vL003.setWidth("100.0%");
         vL003.setHeight("100.0%");
-        vL003.addStyleName("calle");
+
+        vL003.addComponent(labelD001);
+        vL003.setComponentAlignment(labelD001,Alignment.BOTTOM_RIGHT);
+//        vL003.addStyleName("calle");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL003.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL003, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL003.getParent();
@@ -115,7 +115,7 @@ public class RootGridLayoutBase {
         vL004.setImmediate(false);
         vL004.setWidth("100.0%");
         vL004.setHeight("100.0%");
-        vL004.addStyleName("salida");
+//        vL004.addStyleName("salida");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL004.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL004, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL004.getParent();
@@ -154,7 +154,7 @@ public class RootGridLayoutBase {
         vL005.setImmediate(false);
         vL005.setWidth("100.0%");
         vL005.setHeight("100.0%");
-        vL005.addStyleName("entrada");
+//        vL005.addStyleName("calleH");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL005.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL005, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL005.getParent();
@@ -174,7 +174,7 @@ public class RootGridLayoutBase {
         vL007.setImmediate(false);
         vL007.setWidth("100.0%");
         vL007.setHeight("100.0%");
-        vL007.addStyleName("entrada");
+//        vL007.addStyleName("calleT");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL007.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL007, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL007.getParent();
@@ -194,7 +194,7 @@ public class RootGridLayoutBase {
         vL006.setImmediate(false);
         vL006.setWidth("100.0%");
         vL006.setHeight("100.0%");
-        vL006.addStyleName("entrada");
+//        vL006.addStyleName("calleH");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL006.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL006, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL006.getParent();
@@ -233,7 +233,7 @@ public class RootGridLayoutBase {
         vL008.setImmediate(false);
         vL008.setWidth("100.0%");
         vL008.setHeight("100.0%");
-        vL008.addStyleName("salida");
+//        vL008.addStyleName("salida");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL008.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL008, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL008.getParent();
@@ -253,7 +253,7 @@ public class RootGridLayoutBase {
         vL009.setImmediate(false);
         vL009.setWidth("100.0%");
         vL009.setHeight("100.0%");
-        vL009.addStyleName("entrada");
+//        vL009.addStyleName("calle");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL009.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL009, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL009.getParent();
@@ -273,7 +273,7 @@ public class RootGridLayoutBase {
         vL010.setImmediate(false);
         vL010.setWidth("100.0%");
         vL010.setHeight("100.0%");
-        vL010.addStyleName("salida");
+//        vL010.addStyleName("salida");
         AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL010.getParent();
         parentAbstractOrderedLayout.setExpandRatio(vL010, Double.valueOf(0.0).floatValue());
         AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL010.getParent();
@@ -304,7 +304,7 @@ public class RootGridLayoutBase {
     }
 
     protected void initVL001() {
-        vL001.addStyleName("");
+        vL001.addStyleName("calleT");
         vL001.setEnabled(true);
         vL001.setVisible(true);
 //        vL001.setSpacing(true);

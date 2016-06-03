@@ -743,4 +743,14 @@
           background: url("img/calle.jpg") no-repeat fixed center;
           background-size: 50% auto;
     }
+
+	.calleH {
+		background: url("img/calleH.jpg") no-repeat fixed center;
+		background-size: contain;
+	}
+
+	.calleT {
+		background: url("img/calleT.png") no-repeat fixed center;
+		background-size: 100% auto;
+	}
 }
