@@ -31,7 +31,7 @@ class Detector_003  extends DetectorQueues {
 
       val r = scala.util.Random
       val (autosR, motosR, escuelaR, omnibusR)= (r.nextInt(10), r.nextInt(10), r.nextInt(5),r.nextInt(10))
-      val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Escuela.id -> escuelaR, Transportes.Omnibus.id -> omnibusR )
+      val trafico = Map(Transportes.Auto.nombre -> autosR, Transportes.Moto.nombre -> motosR, Transportes.Escuela.nombre -> escuelaR, Transportes.Omnibus.nombre -> omnibusR )
 
       val d3_to_d1 = Mensaje(emisor=Detectores.D003.id, receptor=Detectores.D001.id,trafico)
       val d3_to_d2 = Mensaje(emisor=Detectores.D003.id, receptor=Detectores.D002.id,trafico)

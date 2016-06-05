@@ -11,30 +11,31 @@ import com.ftorterolo.config.Transportes.Vehiculo
   * https://github.com/d6y/enumeration-examples/blob/master/macros/src/main/scala/EnumerationMacros.scala
   */
 
-object  MensajeExpandido {
-  def apply(mensaje: Mensaje): MensajeExpandido = {
-    val trafico = mensaje.trafico.map{case (transporte, cant) => (Transportes(transporte),cant)}
-    MensajeExpandido(Detectores(mensaje.emisor),Detectores(mensaje.receptor), trafico)
-  }
-}
-case class Mensaje(emisor:Detectores.ID, receptor:Detectores.ID, trafico:Map[Transportes.ID,Int])
-case class MensajeExpandido(emisor:Detector, receptor:Detector,trafico:Map[Vehiculo,Int])
+//object  MensajeExpandido {
+//  def apply(mensaje: Mensaje): MensajeExpandido = {
+//    val trafico = mensaje.trafico.map{case (transporte, cant) => (Transportes(transporte),cant)}
+//    MensajeExpandido(Detectores(mensaje.emisor),Detectores(mensaje.receptor), trafico)
+//  }
+//}
+case class Mensaje(emisor:Detectores.ID, receptor:Detectores.ID, trafico:Map[String,Int])
+//case class MensajeExpandido(emisor:Detector, receptor:Detector,trafico:Map[Vehiculo,Int])
 case class Trafico(auto:Int, moto:Int, escuela:Int, Omnibus:Int)
 
 object Transportes {
 
   type ID = Int
-  def apply(id: Int) :Vehiculo = transportes.find(_.id == id).getOrElse(Transportes.Auto)
+  def apply(id: ID) :Vehiculo = transportes.find(_.id == id).getOrElse(Transportes.Auto)
+//  def apply(id: String) :Vehiculo = transportes.find(_.id == id).getOrElse(Transportes.Auto)
 
   val transportes: Set[Vehiculo] = Set(Auto,Moto,Escuela,Omnibus)
 
-  sealed abstract class Vehiculo(val id: ID, nombre:String, maxPasajeros:Int) {
+  sealed abstract class Vehiculo(val id: ID, val nombre:String, maxPasajeros:Int) {
       override def toString = nombre
   }
-  case object Auto extends Vehiculo(1,"Auto",5)
-  case object Moto extends Vehiculo(2,"Moto",2)
-  case object Escuela extends Vehiculo(3,"Escuela",15)
-  case object Omnibus extends Vehiculo(4,"Omnibus",40)
+  case object Auto extends Vehiculo(1,"AUTO",5)
+  case object Moto extends Vehiculo(2,"MOTO",2)
+  case object Escuela extends Vehiculo(3,"ESC",15)
+  case object Omnibus extends Vehiculo(4,"BUS",40)
 }
 
 object Detectores {

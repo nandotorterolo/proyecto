@@ -9,18 +9,21 @@ public class RootGridLayoutBase {
     protected final GridLayout rootGridLayout = new GridLayout();
     protected final VerticalLayout vL001 = new VerticalLayout();
     protected final HorizontalLayout hL001 = new HorizontalLayout();
-    protected final VerticalLayout vL002 = new VerticalLayout();
-    protected final VerticalLayout vL003 = new VerticalLayout();
-    protected final VerticalLayout vL004 = new VerticalLayout();
+    protected final VerticalLayout vL011 = new VerticalLayout();
+    protected final VerticalLayout vL012 = new VerticalLayout();
+    protected final VerticalLayout vL013 = new VerticalLayout();
     protected final HorizontalLayout hL002 = new HorizontalLayout();
-    protected final VerticalLayout vL005 = new VerticalLayout();
-    protected final VerticalLayout vL007 = new VerticalLayout();
-    protected final VerticalLayout vL006 = new VerticalLayout();
+    protected final VerticalLayout vL021 = new VerticalLayout();
+    protected final VerticalLayout vL022 = new VerticalLayout();
+    protected final VerticalLayout vL023 = new VerticalLayout();
     protected final HorizontalLayout hL003 = new HorizontalLayout();
-    protected final VerticalLayout vL008 = new VerticalLayout();
-    protected final VerticalLayout vL009 = new VerticalLayout();
-    protected final VerticalLayout vL010 = new VerticalLayout();
-    protected final Label labelD001 = new Label("TEST");
+    protected final VerticalLayout vL031 = new VerticalLayout();
+    protected final VerticalLayout vL032 = new VerticalLayout();
+    protected final VerticalLayout vL033 = new VerticalLayout();
+    protected final Label labelD001 = new Label("D001:");
+    protected final Label labelD002 = new Label("D002:");
+    protected final Label labelD003 = new Label("D003:");
+    protected final Label labelD004 = new Label("D004:");
 
     public RootGridLayoutBase() {
         constructor = true;
@@ -30,17 +33,17 @@ public class RootGridLayoutBase {
 
     public synchronized void reset() {
         rootGridLayout.removeAllComponents();
-        hL001.addComponent(vL002);
-        hL001.addComponent(vL003);
-        hL001.addComponent(vL004);
+        hL001.addComponent(vL011);
+        hL001.addComponent(vL012);
+        hL001.addComponent(vL013);
+        hL002.addComponent(vL021);
+        hL002.addComponent(vL022);
+        hL002.addComponent(vL023);
+        hL003.addComponent(vL031);
+        hL003.addComponent(vL032);
+        hL003.addComponent(vL033);
         vL001.addComponent(hL001);
-        hL002.addComponent(vL005);
-        hL002.addComponent(vL007);
-        hL002.addComponent(vL006);
         vL001.addComponent(hL002);
-        hL003.addComponent(vL008);
-        hL003.addComponent(vL009);
-        hL003.addComponent(vL010);
         vL001.addComponent(hL003);
         rootGridLayout.addComponent(vL001);
         initRootGridLayout();
@@ -59,71 +62,95 @@ public class RootGridLayoutBase {
         initVL002();
     }
 
+    public void setLabelD001 (String value) {
+        labelD001.setValue(value);
+    }
+    public void setLabelD002 (String value) {
+        labelD002.setValue(value);
+    }
+    public void setLabelD003 (String value) {
+        labelD003.setValue(value);
+    }
+    public void setLabelD004 (String value) {
+        labelD004.setValue(value);
+    }
+
+
     public final GridLayout getRootComponent() {
         return rootGridLayout;
     }
 
     protected void initVL002() {
-        vL002.addStyleName("");
-        vL002.setEnabled(true);
-        vL002.setVisible(true);
-//        vL002.setSpacing(true);
-        vL002.setMargin(false);
-        vL002.setImmediate(false);
-        vL002.setWidth("100.0%");
-        vL002.setHeight("100.0%");
-//        vL002.addStyleName("salida");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL002.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL002, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL002.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL002, Alignment.TOP_LEFT);
+        vL011.addStyleName("");
+        vL011.setEnabled(true);
+        vL011.setVisible(true);
+//        vL011.setSpacing(true);
+        vL011.setMargin(false);
+        vL011.setImmediate(false);
+        vL011.setWidth("100.0%");
+        vL011.setHeight("100.0%");
+
+        labelD001.addStyleName("d001 salida");
+        vL011.addComponent(labelD001);
+
+        labelD002.addStyleName("d002 entrada");
+        vL011.addComponent(labelD002);
+
+        labelD003.addStyleName("d003 salida");
+        vL011.addComponent(labelD003);
+
+        labelD004.addStyleName("d004 entrada");
+        vL011.addComponent(labelD004);
+
+//        vL011.addStyleName("salida");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL011.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL011, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL011.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL011, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL002() {
-        return vL002;
+    public final VerticalLayout getvL011() {
+        return vL011;
     }
 
     protected void initVL003() {
-        vL003.addStyleName("");
-        vL003.setEnabled(true);
-        vL003.setVisible(true);
-//        vL003.setSpacing(true);
-        vL003.setMargin(false);
-        vL003.setImmediate(false);
-        vL003.setWidth("100.0%");
-        vL003.setHeight("100.0%");
-
-        vL003.addComponent(labelD001);
-        vL003.setComponentAlignment(labelD001,Alignment.BOTTOM_RIGHT);
-//        vL003.addStyleName("calle");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL003.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL003, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL003.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL003, Alignment.TOP_LEFT);
+        vL012.addStyleName("");
+        vL012.setEnabled(true);
+        vL012.setVisible(true);
+//        vL012.setSpacing(true);
+        vL012.setMargin(false);
+        vL012.setImmediate(false);
+        vL012.setWidth("100.0%");
+        vL012.setHeight("100.0%");
+//        vL012.addStyleName("calle");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL012.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL012, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL012.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL012, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL003() {
-        return vL003;
+    public final VerticalLayout getvL012() {
+        return vL012;
     }
 
     protected void initVL004() {
-        vL004.addStyleName("");
-        vL004.setEnabled(true);
-        vL004.setVisible(true);
-//        vL004.setSpacing(true);
-        vL004.setMargin(false);
-        vL004.setImmediate(false);
-        vL004.setWidth("100.0%");
-        vL004.setHeight("100.0%");
-//        vL004.addStyleName("salida");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL004.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL004, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL004.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL004, Alignment.TOP_LEFT);
+        vL013.addStyleName("");
+        vL013.setEnabled(true);
+        vL013.setVisible(true);
+//        vL013.setSpacing(true);
+        vL013.setMargin(false);
+        vL013.setImmediate(false);
+        vL013.setWidth("100.0%");
+        vL013.setHeight("100.0%");
+//        vL013.addStyleName("salida");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL013.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL013, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL013.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL013, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL004() {
-        return vL004;
+    public final VerticalLayout getvL013() {
+        return vL013;
     }
 
     protected void initHL001() {
@@ -146,63 +173,66 @@ public class RootGridLayoutBase {
     }
 
     protected void initVL005() {
-        vL005.addStyleName("");
-        vL005.setEnabled(true);
-        vL005.setVisible(true);
-//        vL005.setSpacing(true);
-        vL005.setMargin(false);
-        vL005.setImmediate(false);
-        vL005.setWidth("100.0%");
-        vL005.setHeight("100.0%");
-//        vL005.addStyleName("calleH");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL005.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL005, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL005.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL005, Alignment.TOP_LEFT);
+        vL021.addStyleName("");
+        vL021.setEnabled(true);
+        vL021.setVisible(true);
+//        vL021.setSpacing(true);
+        vL021.setMargin(false);
+        vL021.setImmediate(false);
+        vL021.setWidth("100.0%");
+        vL021.setHeight("100.0%");
+//        vL021.addStyleName("calleH");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL021.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL021, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL021.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL021, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL005() {
-        return vL005;
+    public final VerticalLayout getvL021() {
+        return vL021;
     }
 
     protected void initVL007() {
-        vL007.addStyleName("");
-        vL007.setEnabled(true);
-        vL007.setVisible(true);
-//        vL007.setSpacing(true);
-        vL007.setMargin(false);
-        vL007.setImmediate(false);
-        vL007.setWidth("100.0%");
-        vL007.setHeight("100.0%");
-//        vL007.addStyleName("calleT");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL007.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL007, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL007.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL007, Alignment.TOP_LEFT);
+        vL022.addStyleName("");
+        vL022.setEnabled(true);
+        vL022.setVisible(true);
+//        vL022.setSpacing(true);
+        vL022.setMargin(false);
+        vL022.setImmediate(false);
+        vL022.setWidth("100.0%");
+        vL022.setHeight("100.0%");
+//        vL022.addStyleName("calleT");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL022.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL022, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL022.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL022, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL007() {
-        return vL007;
+    public final VerticalLayout getvL022() {
+        return vL022;
     }
 
     protected void initVL006() {
-        vL006.addStyleName("");
-        vL006.setEnabled(true);
-        vL006.setVisible(true);
-//        vL006.setSpacing(true);
-        vL006.setMargin(false);
-        vL006.setImmediate(false);
-        vL006.setWidth("100.0%");
-        vL006.setHeight("100.0%");
-//        vL006.addStyleName("calleH");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL006.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL006, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL006.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL006, Alignment.TOP_LEFT);
+        vL023.addStyleName("");
+        vL023.setEnabled(true);
+        vL023.setVisible(true);
+//        vL023.setSpacing(true);
+        vL023.setMargin(false);
+        vL023.setImmediate(false);
+        vL023.setWidth("100.0%");
+        vL023.setHeight("100.0%");
+
+
+
+//        vL023.addStyleName("calleH");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL023.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL023, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL023.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL023, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL006() {
-        return vL006;
+    public final VerticalLayout getvL023() {
+        return vL023;
     }
 
     protected void initHL002() {
@@ -225,63 +255,67 @@ public class RootGridLayoutBase {
     }
 
     protected void initVL008() {
-        vL008.addStyleName("");
-        vL008.setEnabled(true);
-        vL008.setVisible(true);
-//        vL008.setSpacing(true);
-        vL008.setMargin(false);
-        vL008.setImmediate(false);
-        vL008.setWidth("100.0%");
-        vL008.setHeight("100.0%");
-//        vL008.addStyleName("salida");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL008.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL008, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL008.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL008, Alignment.TOP_LEFT);
+        vL031.addStyleName("");
+        vL031.setEnabled(true);
+        vL031.setVisible(true);
+//        vL031.setSpacing(true);
+        vL031.setMargin(false);
+        vL031.setImmediate(false);
+        vL031.setWidth("100.0%");
+        vL031.setHeight("100.0%");
+//        vL031.addStyleName("salida");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL031.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL031, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL031.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL031, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL008() {
-        return vL008;
+    public final VerticalLayout getvL031() {
+        return vL031;
     }
 
     protected void initVL009() {
-        vL009.addStyleName("");
-        vL009.setEnabled(true);
-        vL009.setVisible(true);
-//        vL009.setSpacing(true);
-        vL009.setMargin(false);
-        vL009.setImmediate(false);
-        vL009.setWidth("100.0%");
-        vL009.setHeight("100.0%");
-//        vL009.addStyleName("calle");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL009.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL009, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL009.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL009, Alignment.TOP_LEFT);
+        vL032.addStyleName("");
+        vL032.setEnabled(true);
+        vL032.setVisible(true);
+//        vL032.setSpacing(true);
+        vL032.setMargin(false);
+        vL032.setImmediate(false);
+        vL032.setWidth("100.0%");
+        vL032.setHeight("100.0%");
+
+//        vL032.addStyleName("calle");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL032.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL032, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL032.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL032, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL009() {
-        return vL009;
+    public final VerticalLayout getvL032() {
+        return vL032;
     }
 
     protected void initVL010() {
-        vL010.addStyleName("");
-        vL010.setEnabled(true);
-        vL010.setVisible(true);
-//        vL010.setSpacing(true);
-        vL010.setMargin(false);
-        vL010.setImmediate(false);
-        vL010.setWidth("100.0%");
-        vL010.setHeight("100.0%");
-//        vL010.addStyleName("salida");
-        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL010.getParent();
-        parentAbstractOrderedLayout.setExpandRatio(vL010, Double.valueOf(0.0).floatValue());
-        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL010.getParent();
-        parentAlignmentHandler.setComponentAlignment(vL010, Alignment.TOP_LEFT);
+        vL033.addStyleName("");
+        vL033.setEnabled(true);
+        vL033.setVisible(true);
+//        vL033.setSpacing(true);
+        vL033.setMargin(false);
+        vL033.setImmediate(false);
+        vL033.setWidth("100.0%");
+        vL033.setHeight("100.0%");
+
+
+
+//        vL033.addStyleName("salida");
+        AbstractOrderedLayout parentAbstractOrderedLayout = (AbstractOrderedLayout) vL033.getParent();
+        parentAbstractOrderedLayout.setExpandRatio(vL033, Double.valueOf(0.0).floatValue());
+        AlignmentHandler parentAlignmentHandler = (AlignmentHandler) vL033.getParent();
+        parentAlignmentHandler.setComponentAlignment(vL033, Alignment.TOP_LEFT);
     }
 
-    public final VerticalLayout getvL010() {
-        return vL010;
+    public final VerticalLayout getvL033() {
+        return vL033;
     }
 
     protected void initHL003() {

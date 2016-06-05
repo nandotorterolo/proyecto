@@ -11,13 +11,14 @@ object TestRandom extends App {
   val omnibusR = r.nextInt(10)
 
   val m1 = Mensaje(emisor=Detectores.D001.id, receptor=Detectores.D002.id,
-    Map( Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR)
+    Map( Transportes.Auto.nombre -> autosR, Transportes.Moto.nombre -> motosR)
   )
   val json = JsonUtil.toJson(m1)
 
   val m2 = JsonUtil.fromJson[Mensaje](json)
-  println(m2)  // Mensaje(1,2,Map(5 -> 1, 2 -> 2))
-//  println(MensajeExpandido(m2))  // MensajeExpandido(1D001,2D002,Map(5 -> Auto, 2 -> Moto))
+  println(json)
+  println(m1)
+  println(m2)
   println(JsonUtil.toJson(json))  // MensajeExpandido(1D001,2D002,Map(5 -> Auto, 2 -> Moto))
 
 

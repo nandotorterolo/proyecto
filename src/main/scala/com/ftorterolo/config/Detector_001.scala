@@ -2,6 +2,7 @@ package com.ftorterolo.config
 
 import java.util.concurrent.{TimeUnit, _}
 
+import com.ftorterolo.SemDasboard.views.RootGridLayoutBase
 import com.ftorterolo.util.JsonUtil
 import org.slf4j.LoggerFactory
 
@@ -18,8 +19,10 @@ class Detector_001 extends DetectorQueues {
   var trafico_002 = Array(0, 0, 0, 0)
   var trafico_003 = Array(0, 0, 0, 0)
   var trafico_004 = Array(0, 0, 0, 0)
+  var layoutBase:RootGridLayoutBase = null
 
-  def start(initialDelay: Long, period: Long, unit: TimeUnit) = {
+  def start(initialDelay: Long, period: Long, unit: TimeUnit, layout:RootGridLayoutBase) = {
+    layoutBase= layout
     sendExecutor.scheduleAtFixedRate(sendRunner, initialDelay, period, TimeUnit.SECONDS)
     receiveExecutor.scheduleAtFixedRate(receiveRunner, initialDelay + 10, period/3, TimeUnit.SECONDS)
   }
@@ -43,7 +46,7 @@ class Detector_001 extends DetectorQueues {
       trafico_001.update(2,escuelaR)
       trafico_001.update(3,omnibusR)
 
-      val trafico = Map(Transportes.Auto.id -> autosR, Transportes.Moto.id -> motosR, Transportes.Escuela.id -> escuelaR, Transportes.Omnibus.id -> omnibusR )
+      val trafico = Map(Transportes.Auto.nombre -> autosR, Transportes.Moto.nombre -> motosR, Transportes.Escuela.nombre -> escuelaR, Transportes.Omnibus.nombre -> omnibusR )
 
       val d1_to_d2 = Mensaje(emisor = Detectores.D001.id, receptor = Detectores.D002.id, trafico)
       val d1_to_d3 = Mensaje(emisor = Detectores.D001.id, receptor = Detectores.D003.id, trafico)
@@ -52,6 +55,9 @@ class Detector_001 extends DetectorQueues {
       MessageHandler.sendMessage(queueUrlD002, JsonUtil.toJson(d1_to_d2), lamport, snapshot)
       MessageHandler.sendMessage(queueUrlD003, JsonUtil.toJson(d1_to_d3), lamport, snapshot)
       MessageHandler.sendMessage(queueUrlD004, JsonUtil.toJson(d1_to_d4), lamport, snapshot)
+
+      val text1 = "D1:" + JsonUtil.toJson(lamport) + s"\n$d1_to_d2"
+      layoutBase.setLabelD001(text1)
 
       //      println(s"$lamport")
     }
@@ -65,7 +71,7 @@ class Detector_001 extends DetectorQueues {
       if (messages.nonEmpty) {
         val mensaje = JsonUtil.fromJson[Mensaje](messages.head.getBody)
         val lamport = JsonUtil.fromJson[(Int, Int, Int, Int)](messages.head.getMessageAttributes.get(MessageHandler.Lamport).getStringValue)
-        val snapshot = JsonUtil.fromJson[String](messages.head.getMessageAttributes.get(MessageHandler.Snapshot).getStringValue)
+//        val snapshot = JsonUtil.fromJson[String](messages.head.getMessageAttributes.get(MessageHandler.Snapshot).getStringValue)
 
 //        logger.debug(s"Snapshot $snapshot")
 
@@ -75,26 +81,33 @@ class Detector_001 extends DetectorQueues {
           vector_D001.update(2, Math.max(vector_D001(2), lamport._3))
           vector_D001.update(3, Math.max(vector_D001(3), lamport._4))
 
-          if (mensaje.emisor.equals(Detectores.D002.id) && vector_D001(1) == lamport._2) {
-            trafico_002.update(0,mensaje.trafico.getOrElse(Transportes.Auto.id,0))
-            trafico_002.update(1,mensaje.trafico.getOrElse(Transportes.Moto.id,0))
-            trafico_002.update(2,mensaje.trafico.getOrElse(Transportes.Escuela.id,0))
-            trafico_002.update(3,mensaje.trafico.getOrElse(Transportes.Omnibus.id,0))
+          if (mensaje.emisor.equals(Detectores.D002.id) ){// && vector_D001(1) == lamport._2) {
+            trafico_002.update(0,mensaje.trafico.getOrElse(Transportes.Auto.nombre,0))
+            trafico_002.update(1,mensaje.trafico.getOrElse(Transportes.Moto.nombre,0))
+            trafico_002.update(2,mensaje.trafico.getOrElse(Transportes.Escuela.nombre,0))
+            trafico_002.update(3,mensaje.trafico.getOrElse(Transportes.Omnibus.nombre,0))
+            val text2 = "D2: " + JsonUtil.toJson(lamport) + s"\n$mensaje"
+            layoutBase.setLabelD002(text2)
           }
 
-          if (mensaje.emisor.equals(Detectores.D002.id) && vector_D001(2) == lamport._3) {
-            trafico_003.update(0,mensaje.trafico.getOrElse(Transportes.Auto.id,0))
-            trafico_003.update(1,mensaje.trafico.getOrElse(Transportes.Moto.id,0))
-            trafico_003.update(2,mensaje.trafico.getOrElse(Transportes.Escuela.id,0))
-            trafico_003.update(3,mensaje.trafico.getOrElse(Transportes.Omnibus.id,0))
+          if (mensaje.emisor.equals(Detectores.D003.id) ){//&& vector_D001(2) == lamport._3) {
+            trafico_003.update(0,mensaje.trafico.getOrElse(Transportes.Auto.nombre,0))
+            trafico_003.update(1,mensaje.trafico.getOrElse(Transportes.Moto.nombre,0))
+            trafico_003.update(2,mensaje.trafico.getOrElse(Transportes.Escuela.nombre,0))
+            trafico_003.update(3,mensaje.trafico.getOrElse(Transportes.Omnibus.nombre,0))
+            val text3 = "D3: " + JsonUtil.toJson(lamport) + s"\n$mensaje"
+            layoutBase.setLabelD003(text3)
           }
 
-          if (mensaje.emisor.equals(Detectores.D002.id) && vector_D001(3) == lamport._4) {
-            trafico_004.update(0,mensaje.trafico.getOrElse(Transportes.Auto.id,0))
-            trafico_004.update(1,mensaje.trafico.getOrElse(Transportes.Moto.id,0))
-            trafico_004.update(2,mensaje.trafico.getOrElse(Transportes.Escuela.id,0))
-            trafico_004.update(3,mensaje.trafico.getOrElse(Transportes.Omnibus.id,0))
+          if (mensaje.emisor.equals(Detectores.D004.id) ){//&& vector_D001(3) == lamport._4) {
+            trafico_004.update(0,mensaje.trafico.getOrElse(Transportes.Auto.nombre,0))
+            trafico_004.update(1,mensaje.trafico.getOrElse(Transportes.Moto.nombre,0))
+            trafico_004.update(2,mensaje.trafico.getOrElse(Transportes.Escuela.nombre,0))
+            trafico_004.update(3,mensaje.trafico.getOrElse(Transportes.Omnibus.nombre,0))
+            val text4 = "D4: " + JsonUtil.toJson(lamport) + s"\n$mensaje"
+            layoutBase.setLabelD004(text4)
           }
+
           // save message and delete from the quede
           MessageHandler.deleteMessage(queueUrlD001,messages.head.getReceiptHandle)
         }

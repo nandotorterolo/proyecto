@@ -23,12 +23,14 @@ class CorredorView extends VerticalLayout with View  {
   val detector_004 = new Detector_004
   val detector_005 = new Detector_005
 
+  val layout = new RootGridLayoutBase
+
   val startButton : Button = {
     val but = new Button("start")
     but.addClickListener( new ClickListener {
       override def buttonClick(event: ClickEvent): Unit = {
 //        MessageHandler.purge()
-        detector_001.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
+        detector_001.start(initialDelay = 10, period = 30, TimeUnit.SECONDS, layout)
         detector_002.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
         detector_003.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
         detector_004.start(initialDelay = 10, period = 30, TimeUnit.SECONDS)
@@ -50,6 +52,17 @@ class CorredorView extends VerticalLayout with View  {
 //        detector_004.shutdown()
         startButton.setEnabled(true)
         stopButton.setEnabled(false)
+      }
+    }
+    )
+    but
+  }
+
+  val refresh : Button = {
+    val but = new Button("Refresh")
+    but.addClickListener( new ClickListener {
+      override def buttonClick(event: ClickEvent): Unit = {
+        Notification.show("refresh")
       }
     }
     )
@@ -83,13 +96,13 @@ class CorredorView extends VerticalLayout with View  {
     stopButton.setEnabled(false)
     vlayout.addComponent(startButton)
     vlayout.addComponent(stopButton)
+    vlayout.addComponent(refresh)
     addComponent(vlayout)
 
     //    val row = getRowView
 //    row.addComponent(vlayout)
 
     val row2 = getRowView
-    val layout = new RootGridLayoutBase
     row2.addComponent(layout.getRootComponent)
 
 

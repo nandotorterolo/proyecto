@@ -48,7 +48,7 @@ object SimpleQueueService extends App{
     val res = sqs.getQueueAttributes(queueUrl, List("ApproximateNumberOfMessages"))
     res.getAttributes.foreach{case (u,v) => println(s"$u : $v")}
 
-    val m1 = Mensaje(emisor=Detectores.D001.id, receptor=Detectores.D002.id, Map((5,Transportes.Auto.id), (2,Transportes.Moto.id)))
+    val m1 = Mensaje(emisor=Detectores.D001.id, receptor=Detectores.D002.id, Map((Transportes.Auto.nombre,5), (Transportes.Moto.nombre,3)))
     val json = JsonUtil.toJson(m1)
 //    println(json)
 
