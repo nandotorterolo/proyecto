@@ -1,6 +1,6 @@
-package com.ftorterolo.acmDashboard.ui
+package com.ftorterolo.SemDashboard.ui
 
-import com.ftorterolo.acmDashboard.ui.views.DashboardView
+import com.ftorterolo.SemDashboard.ui.views.{CorredorView, DashboardView}
 import com.ftorterolo.dashboard.BaseMainView
 import com.vaadin.ui.MenuBar.Command
 import com.vaadin.navigator.Navigator
@@ -14,7 +14,8 @@ class MainView (main: Main) extends BaseMainView {
   protected val navigator: Navigator = new Navigator(main, contentLayout)
 
   protected val mainMenu: MainMenu = MainMenu(
-    "Dashboard" -> classOf[DashboardView]
+    "Dashboard" -> classOf[DashboardView],
+    "Corredor"-> classOf[CorredorView]
   )
 
   protected val usuarioCommand: Command = new Command {

@@ -1,6 +1,10 @@
-package com.ftorterolo.acmDashboard.ui
+package com.ftorterolo.SemDashboard.ui
 
+import java.util.concurrent.TimeUnit
+
+import com.ftorterolo.config.Detector_001
 import com.ftorterolo.dashboard.{LoginView, BaseMain}
+import com.google.gwt.thirdparty.guava.common.util.concurrent.AbstractScheduledService.Scheduler
 import com.vaadin.annotations.{PreserveOnRefresh, Theme, Title}
 import com.vaadin.server._
 import com.vaadin.shared.ui.label.ContentMode
@@ -21,6 +25,7 @@ class Main extends UI with BaseMain {
   setStyleName("login-bg")
 
   app.initializeIfNot
+
 
   override def init(request: VaadinRequest) = {
     super.init(request)
