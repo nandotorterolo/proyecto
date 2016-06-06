@@ -1,14 +1,8 @@
+#Sistemas Distribuidos
 
+Obligatorio 2016
 
-Start: 
-    
-    jetty:start
+Profesores: Daniel Canoniero​/ ​Esteban Barrios
 
+Integrantes: Martín Germán / Fernando Torterolo / Gianni Iaquinta
 
-Plugins
-
-
-
-Utils
-
-https://github.com/ripla/vaadin-scala.g8/blob/master/src%2Fmain%2Fg8%2Fbuild.sbt
