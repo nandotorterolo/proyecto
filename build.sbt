@@ -22,3 +22,9 @@ libraryDependencies ++= Seq(
 )
 
 enablePlugins(JettyPlugin)
+
+vaadinWebSettings
+
+vaadinAddOnSettings
+
+vaadinWebSettings
