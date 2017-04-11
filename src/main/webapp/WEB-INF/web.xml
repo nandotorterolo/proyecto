@@ -13,7 +13,7 @@
         <init-param>
             <description>Vaadin UI to display</description>
             <param-name>UI</param-name>
-            <param-value>com.ftorterolo.SemDashboard.ui.Main</param-value>
+            <param-value>com.vsf.dashboardImpl.ui.Main</param-value>
         </init-param>
 
         <!--<init-param>-->

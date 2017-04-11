@@ -240,4 +240,16 @@
     .v-table .v-table-row-Salida{
       background: rgba(255, 0, 0, 0.20);
     }
+
+	// paint onnly cell color of some founts
+	.v-table .v-table-cell-content-gain{
+		color: rgba(0, 103, 0, 0.71);
+	}
+	.v-table .v-table-cell-content-loss{
+		color: rgba(124, 0, 0, 0.71);
+	}
+
+    .v-table .v-table-cell-content-bold{
+      font-weight: bold;
+    }
 }

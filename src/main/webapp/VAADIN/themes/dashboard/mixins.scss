@@ -29,13 +29,13 @@
 @mixin appearance ($a) {
 	-webkit-appearance: $a;
 	-moz-appearance: $a;
-	appearance: $a;
+	//appearance: $a;
 }
 
 @mixin transition ($t) {
 	-webkit-transition: $t;
 	-moz-transition: $t;
-	-ms-transition: $t;
+	//-ms-transition: $t;
 	-o-transition: $t;
 	transition: $t;
 }
@@ -48,18 +48,16 @@
 	transform: $t;
 }
 
-@mixin animation ($name, $duration, $easing) {
-	-webkit-animation: $name $duration $easing;
-	-moz-animation: $name $duration $easing;
-	-ms-animation: $name $duration $easing;
-	-o-animation: $name $duration $easing;
-	animation: $name $duration $easing;
+@mixin animation ($anim) {
+	-webkit-animation: $anim;
+	-moz-animation: $anim;
+	animation: $anim;
 }
 
 @mixin animation-duration ($duration) {
 	-webkit-animation-duration: $duration;
 	-moz-animation-duration: $duration;
-	-ms-animation-duration: $duration;
+	//-ms-animation-duration: $duration;
 	-o-animation-duration: $duration;
 	animation-duration: $duration;
 }
@@ -67,7 +65,7 @@
 @mixin animation-delay ($delay) {
 	-webkit-animation-delay: $delay;
 	-moz-animation-delay: $delay;
-	-ms-animation-delay: $delay;
+	//-ms-animation-delay: $delay;
 	-o-animation-delay: $delay;
 	animation-delay: $delay;
 }
@@ -75,7 +73,7 @@
 @mixin animation-fill-mode ($fm) {
 	-webkit-animation-fill-mode: $fm;
 	-moz-animation-fill-mode: $fm;
-	-ms-animation-fill-mode: $fm;
+	//-ms-animation-fill-mode: $fm;
 	-o-animation-fill-mode: $fm;
 	animation-fill-mode: $fm;
 }
@@ -86,7 +84,7 @@
 /* 	@include animation(fade-in, 160ms, ease-out); */
 	-webkit-animation: fade-in 160ms ease-out;
 	-moz-animation: fade-in 160ms ease-out;
-	-ms-animation: fade-in 160ms ease-out;
+	//-ms-animation: fade-in 160ms ease-out;
 	-o-animation: fade-in 160ms ease-out;
 	animation: fade-in 160ms ease-out;
 	opacity: 1;
