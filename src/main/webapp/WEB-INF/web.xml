@@ -22,11 +22,20 @@
         <!--</init-param>-->
 
         <init-param>
+            <description>Application widgetset</description>
+            <param-name>widgetset</param-name>
+            <param-value>com.vaadin.tapio.googlemaps.Widgetset</param-value>
+        </init-param>
+
+        <init-param>
             <param-name>closeIdleSessions</param-name>
             <param-value>true</param-value>
         </init-param>
 
-
+        <init-param>
+            <param-name>productionMode</param-name>
+            <param-value>false</param-value>
+        </init-param>
         <!--&lt;!&ndash; Enable server push &ndash;&gt;-->
 
         <!--<init-param>-->

@@ -9,10 +9,10 @@ import org.slf4j.{Logger, LoggerFactory}
 object DashboardApplication extends BaseApplication {
 
   val logger: Logger = LoggerFactory.getLogger(getClass.getName)
-  val name: String = "Proyecto"
+  val name: String = "Area Segura"
   val developerUsername: String = "developer"
   val developerPassword: String = "a123456"
-  val companyName: String = "UCU"
+  val companyName: String = "VFS"
   val version: String = "17.04.1"
   def isDeveloperMode = true
 

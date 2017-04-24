@@ -1,6 +1,6 @@
 package com.vsf.dashboardImpl.ui
 
-import com.vsf.dashboardImpl.ui.views.{DashboardView, EmployeesView}
+import com.vsf.dashboardImpl.ui.views.{DashboardView, EmployeesView, RondasView}
 import com.vsf.dashboard.BaseMainLayout
 import com.vaadin.navigator.Navigator
 import com.vaadin.shared.ui.label.ContentMode
@@ -15,7 +15,8 @@ class MainLayout(main: Main) extends BaseMainLayout {
 
   protected val mainMenu: MainMenu = MainMenu(
     "Dashboard" -> classOf[DashboardView],
-    "Empleados" -> classOf[EmployeesView]
+    "Empleados" -> classOf[EmployeesView],
+    "Rondas" -> classOf[RondasView]
   )
 
   protected val usuarioCommand: Command = new Command {

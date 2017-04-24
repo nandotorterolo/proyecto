@@ -2,12 +2,7 @@ package com.vsf.dashboardImpl.ui.views
 
 object TablePropertyId {
 
-  val idTimePickUp = "idTimePickUp"
-  val idVehicle = "idVehicle"
-  val idDuration = "idDuration"
-  val socialId = "idDistance"
-  val idPaid = "idTotal"
-  val idPaidCalc = "idTotalCalculado"
-  val surname = "idDiff"
-  val name = "nombre"
+  val socialId = "idSocialId"
+  val surname = "idSurname"
+  val name = "idName"
 }

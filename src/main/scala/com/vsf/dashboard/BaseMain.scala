@@ -13,8 +13,8 @@ trait BaseMain extends LogException {
   val app: BaseApplication
 
   protected val rootLayout = new CssLayout()
-  private var loginView: LoginView = null
-  private var mainView: BaseMainLayout = null
+  private var loginView: LoginView = null  // todo change for option
+  private var mainView: BaseMainLayout = null  // todo change for option
 
   def login(username: String, password: String): Unit = {
     app.login(username, password) match {

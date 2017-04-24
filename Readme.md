@@ -25,6 +25,26 @@ Permite la gestión de usuarios, dispositivos, rondas y cronogramas y visualizac
 *xsbt-web-plugin* (https://github.com/earldouglas/xsbt-web-plugin) 
 
     sbt extension for building J2EE Web applications in Scala and Java.  
+    
+*sbt-vaadin-plugin* (https://github.com/henrikerola/sbt-vaadin-plugin)
+
+    sbt-vaadin-plugin is a sbt plugin that makes possible to use sbt to build Vaadin projects. The plugin is for Vaadin 7 and sbt 0.13.
+    
+    
+# Database Mysql
+
+    mysql> CREATE DATABASE areasegura;
+    Query OK, 1 row affected (0.00 sec)
+    
+    mysql> CREATE USER 'appareasegura'@'localhost' IDENTIFIED BY 'password';  
+    Query OK, 0 rows affected (0.00 sec)
+    
+    mysql> GRANT ALL PRIVILEGES ON areasegura.* TO 'appareasegura'@'localhost';
+    Query OK, 0 rows affected (0.00 sec)
+    
+    mysql> FLUSH PRIVILEGES;
+    Query OK, 0 rows affected (0.00 sec)
+    
 
 # Java Messaging Service (JMS) API
 is a specification that allows java programs to create, send and receive messages asynchronously from one application to another. 

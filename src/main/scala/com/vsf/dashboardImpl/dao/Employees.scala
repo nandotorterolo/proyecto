@@ -8,11 +8,16 @@ import scala.util.Random
 
 object Employees {
   def getEmployees: Future[List[Employ]]= {
-    def randomStr = Random.alphanumeric.take(10).mkString
     Future {
 //      (1 to 20).map(i => Employ(randomStr, randomStr, randomStr)).toList
-      (1 to 20).map(i => Employ("randomStr", "randomStr", "randomStr")).toList
+      (1 to 4).map(i => Employ("randomStr", "randomStr", "randomStr")).toList
     }
   }
 
+
+  def getEmployees2: List[Employ]= {
+    def randomStr = Random.alphanumeric.take(10).mkString
+    (1 to 20).map(i => Employ(randomStr, randomStr, randomStr)).toList
+
+  }
 }
