@@ -11,7 +11,7 @@ import org.slf4j.{Logger, LoggerFactory}
 @Title("Proyecto")
 @PreserveOnRefresh
 @Theme("dashboard")
-class Main extends UI with BaseMain {
+class MainUI extends UI with BaseMain {
 
   val app = DashboardApplication
   val logger : Logger = LoggerFactory.getLogger(this.getClass)

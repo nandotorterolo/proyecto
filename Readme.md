@@ -1,6 +1,6 @@
 # Proyecto de Ingeniería de Software
 
-Tutor: 
+Tutor: Gonzalo Pennino
 
 Integrantes: Victor Cordeiro/ Sebastían / Fernando Torterolo
 
@@ -127,9 +127,38 @@ Existen sesiones transaccionales y las no transaccionales,
 La entrega/recepcion de mensajes no comienza hasta que no se inicia la conexión creada mediante el método start.
  
     
+# Mapas
+Debemos crear una cuenta de google(o otro proveedor) para consultar los mapas.  
+En este caso cree una api_Key con mi usario, luego la habile la opcion Google Maps JavaScript API. 
+https://console.developers.google.com/apis/api/maps-backend.googleapis.com/overview?project=ftorterolo-988&duration=PT1H
+TODO: Debemos definir que proveedor de mapas vamos a usar(google me parece bien, 25.000 x dia, ademas tener cuidado con los addons ) 
+
+
+
+    Google Maps: https://developers.google.com/maps/
+    Bing Maps: http://www.microsoft.com/maps/
+    Nokia Maps: http://developer.here.com/
+    Openstreetmap: http://wiki.openstreetmap.org/wiki/Static_map_images/
+
+
+# Vaadin
+
+Para agregar addons.
+
+* "com.vaadin.tapio" % "googlemaps" % "1.3.4", agrgar las dependencias
+* en archivo web.xml indicar el nuevo servlet.  
+    <init-param>
+        <description>Application widgetset</description>
+        <param-name>widgetset</param-name>
+        <param-value>com.vaadin.tapio.googlemaps.Widgetset</param-value>
+    </init-param>
+* en caso de necesitar compiarlos a js. , 
+
     
-    
-    
+firebase:
+Se debe generar un proyeto y generar las claves:
+
+https://console.firebase.google.com/project/proyecto-858b4/settings/serviceaccounts/adminsdk
     
     
     

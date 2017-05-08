@@ -3,6 +3,8 @@ package com.vsf.dashboardImpl.ui
 import com.vsf.dashboard.BaseApplication
 import com.vaadin.server.Page
 import com.vaadin.ui.UI
+import com.vsf.dashboardImpl.dao.DAO
+import com.vsf.dashboardImpl.dao.firebase.FirebaseDao
 import org.joda.time.DateTime
 import org.slf4j.{Logger, LoggerFactory}
 
@@ -16,7 +18,10 @@ object DashboardApplication extends BaseApplication {
   val version: String = "17.04.1"
   def isDeveloperMode = true
 
+  lazy val dao: DAO = new FirebaseDao
+
   protected def init: Boolean = {
+    dao.startup()
     true
   }
 

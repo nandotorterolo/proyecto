@@ -4,5 +4,5 @@ object TablePropertyId {
 
   val socialId = "idSocialId"
   val surname = "idSurname"
-  val name = "idName"
+  val name = "idNombre"
 }

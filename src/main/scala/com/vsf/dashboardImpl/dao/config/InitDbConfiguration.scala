@@ -21,7 +21,7 @@ object InitDbConfiguration extends App with DbConfiguration with UsesLogger{
   }
 
   val f = for {
-    // Table 'USERS' already exists
+    // Table 'Empleados' already exists
     _ <- employs.drop().andThen {case res: Try[Unit]=> log("drop", res)}
     _ <- employs.create().andThen {case res: Try[Unit] => log("create", res)}
 

@@ -1,5 +1,6 @@
 /* Import all the mixins for this theme */
 @import "dashboard.scss";
+@import "designs.scss";
 
 
 /* Font embeds and keyframe definitions need to be 
@@ -13,6 +14,7 @@
 
 /* Output the actual theme selectors */
 .dashboard {
+  @include vaadin-crud-template;
 	@include dashboard;
 }
 

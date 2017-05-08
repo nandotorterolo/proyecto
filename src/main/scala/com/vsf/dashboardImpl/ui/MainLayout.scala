@@ -7,7 +7,7 @@ import com.vaadin.shared.ui.label.ContentMode
 import com.vaadin.ui.MenuBar.Command
 import com.vaadin.ui._
 
-class MainLayout(main: Main) extends BaseMainLayout {
+class MainLayout(main: MainUI) extends BaseMainLayout {
 
   protected val logo: Component = new Label("<span>" + main.app.nameAndVersion + "</span>" + main.app.companyName, ContentMode.HTML)
 

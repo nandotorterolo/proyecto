@@ -13,7 +13,7 @@
         <init-param>
             <description>Vaadin UI to display</description>
             <param-name>UI</param-name>
-            <param-value>com.vsf.dashboardImpl.ui.Main</param-value>
+            <param-value>com.vsf.dashboardImpl.ui.MainUI</param-value>
         </init-param>
 
         <!--<init-param>-->
@@ -36,13 +36,12 @@
             <param-name>productionMode</param-name>
             <param-value>false</param-value>
         </init-param>
-        <!--&lt;!&ndash; Enable server push &ndash;&gt;-->
 
-        <!--<init-param>-->
-            <!--<param-name>pushmode</param-name>-->
-            <!--<param-value>automatic</param-value>-->
-        <!--</init-param>-->
-
+        <!-- Enable server push -->
+        <init-param>
+            <param-name>pushmode</param-name>
+            <param-value>manual</param-value>
+        </init-param>
         <async-supported>true</async-supported>
 
     </servlet>

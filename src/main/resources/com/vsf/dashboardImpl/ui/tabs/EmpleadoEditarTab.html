@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;../../src/main/java&quot;,&quot;THEME&quot;:&quot;valo&quot;}">
+  <meta name="vaadin-version" content="7.7.7">
+ </head>
+ <body>
+  <vaadin-vertical-layout size-full>
+   <vaadin-horizontal-layout>
+    <vaadin-form-layout size-auto margin>
+     <vaadin-text-field caption="Nombre" _id="tfNombre"></vaadin-text-field>
+     <vaadin-text-field caption="Apellido" _id="tfApellido"></vaadin-text-field>
+     <vaadin-text-field caption="C.I." _id="tfCi"></vaadin-text-field>
+     <vaadin-combo-box caption="Sexo" _id="cbSexo">
+      <option>Masculino</option>
+      <option>Femenino</option>
+     </vaadin-combo-box>
+     <vaadin-text-field caption="Dirección" _id="tfDireccion"></vaadin-text-field>
+     <vaadin-text-field caption="Teléfono" _id="tfTelefono"></vaadin-text-field>
+     <vaadin-text-field caption="Teléfono 2" _id="tfTelefonoDos"></vaadin-text-field>
+     <vaadin-check-box icon="fonticon://FontAwesome/f11e" caption="Activo" _id="chbActivo"></vaadin-check-box>
+     <vaadin-button icon="fonticon://FontAwesome/f0c7" plain-text _id="btGrabar">
+       Grabar 
+     </vaadin-button>
+    </vaadin-form-layout>
+    <vaadin-form-layout size-auto>
+     <vaadin-horizontal-layout width="175px" height="138px">
+      <vaadin-image width="175px" height="138px" :center></vaadin-image>
+     </vaadin-horizontal-layout>
+     <vaadin-upload caption="dfg"></vaadin-upload>
+     <vaadin-text-area caption="Notas" _id="taNotas"></vaadin-text-area>
+    </vaadin-form-layout>
+   </vaadin-horizontal-layout>
+   <vaadin-horizontal-layout caption="Rondas Asignadas" size-full :expand></vaadin-horizontal-layout>
+  </vaadin-vertical-layout>
+ </body>
+</html>

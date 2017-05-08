@@ -1,46 +1,34 @@
+import sbt.internals.ProjectSettings
+
 name := "proyecto"
 
 version := "1.0"
 
-scalaVersion := "2.11.8"
+scalaVersion in ThisBuild := "2.11.8"
 
-crossPaths := false
+crossPaths in ThisBuild := false
 
-val vaadinVersion = "7.6.5"
+scalacOptions in ThisBuild := Seq("-deprecation")
 
-resolvers += "Scaladin Snapshots" at "http://henrikerola.github.io/repository/snapshots/"    // scaladin
-
-resolvers += "vaadin-addons" at "http://maven.vaadin.com/vaadin-addons"    // vaadin addons
-
-libraryDependencies ++= Seq(
-  "com.vaadin" % "vaadin-server" % vaadinVersion,
-  "com.vaadin" % "vaadin-client-compiled" % vaadinVersion % "container",
-  "com.vaadin" % "vaadin-themes" % vaadinVersion % "container",
-  "com.vaadin" % "vaadin-client" % vaadinVersion,
-  "com.vaadin" % "vaadin-client-compiler" % vaadinVersion,
-  "com.vaadin.tapio" % "googlemaps" % "1.3.4",
-  "org.vaadin.addons" %% "scaladin" % "3.2-SNAPSHOT",
-  "org.slf4j" % "slf4j-api" % "1.7.21",
-  "ch.qos.logback" % "logback-classic" % "1.1.7",
-  "joda-time" % "joda-time" % "2.9.3",
-  "org.joda" % "joda-convert" % "1.8.1",
-  "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
-  "com.fasterxml.jackson.module" % "jackson-module-scala_2.11" % "2.7.3",
-  "com.typesafe" % "config" % "1.3.1",
-  "org.apache.activemq" % "activemq-client" % "5.14.2",
-  "com.typesafe.slick" %% "slick" % "3.2.0",
-  "com.typesafe.slick" %% "slick-hikaricp" % "3.2.0",
-  "mysql" % "mysql-connector-java" % "5.1.41"
+resolvers in ThisBuild  ++= Seq(
+  "Scaladin Snapshots" at "http://henrikerola.github.io/repository/snapshots/",   // scaladin
+  "vaadin-addons" at "http://maven.vaadin.com/vaadin-addons",                     // vaadin addons
+  "sbt-vaadin-plugin repo" at "http://henrikerola.github.io/repository/releases"
 )
 
-vaadinWidgetsets := Seq("com.vaadin.tapio.googlemaps.Widgetset")
+lazy val root = project.in(file(".")).enablePlugins(JettyPlugin).settings(vaadinWebSettings :_*).settings(
+  name := "proyecto",
+  artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) => "proyecto." + artifact.extension },
+  libraryDependencies ++= Dependencies.deps,
+  vaadinWidgetsets := Seq("com.vaadin.tapio.googlemaps.Widgetset"),
+  javaOptions in compileVaadinWidgetsets := Seq("-Xss8M", "-Xmx512M", "-XX:MaxPermSize=512M"),
+  vaadinOptions in compileVaadinWidgetsets := Seq("-strict", "-draftCompile"),
+  target in compileVaadinWidgetsets := (sourceDirectory in Compile).value / "webapp" / "VAADIN" / "widgetsets",
+  skip in compileVaadinWidgetsets in resourceGenerators := true,
+  javaOptions in vaadinDevMode ++= Seq("-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
+  // JavaDoc generation causes problems
+  sources in doc in Compile := List(),
+  webappWebInfClasses := true
+)
 
-// Widgetset compilation needs memory and to avoid an out of memory error it usually needs more memory:
-javaOptions in compileVaadinWidgetsets := Seq("-Xss8M", "-Xmx512M", "-XX:MaxPermSize=512M")
 
-vaadinOptions in compileVaadinWidgetsets := Seq("-logLevel", "DEBUG", "-strict")
-
-// Compile widgetsets into the source directory (by default themes are compiled into the target directory)
-target in compileVaadinWidgetsets := (sourceDirectory in Compile).value / "webapp" / "VAADIN" / "widgetsets"
-
-enablePlugins(JettyPlugin)

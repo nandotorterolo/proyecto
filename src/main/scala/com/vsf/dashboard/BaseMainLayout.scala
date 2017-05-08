@@ -1,16 +1,14 @@
 package com.vsf.dashboard
 
-import com.vsf.vaadin.CreateWindow
 import com.vaadin.navigator.{Navigator, View}
 import com.vaadin.server.{Sizeable, ThemeResource}
 import com.vaadin.ui.Button.{ClickEvent, ClickListener}
 import com.vaadin.ui.MenuBar.Command
 import com.vaadin.ui._
-import org.slf4j.LoggerFactory
+import com.vsf.util.UsesLogger
+import com.vsf.vaadin.CreateWindow
 
-abstract class BaseMainLayout extends HorizontalLayout {
-
-  lazy val logger = LoggerFactory.getLogger(getClass.getName)
+abstract class BaseMainLayout extends HorizontalLayout with UsesLogger{
 
   protected val contentLayout = new CssLayout()
   private val sidebarLayout = new VerticalLayout()
